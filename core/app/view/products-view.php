@@ -4,14 +4,11 @@
 		<h1>Productos</h1>
 <div class="">
 	<a href="index.php?view=newproduct" class="btn btn-secondary">Agregar Producto</a>
-<div class="btn-group pull-right">
-  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">
-    <i class="fa fa-download"></i> Descargar <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" role="menu">
-    <li><a href="report/products-word.php">Word 2007 (.docx)</a></li>
-  </ul>
-</div>
+    <div class="btn-group pull-right">
+        <a href="report/products-word.php" class="btn btn-secondary">
+            <i class="fa fa-download"></i> Descargar Word
+        </a>
+    </div>
 </div>
 <br>
 

@@ -70,14 +70,17 @@ $word->addTableStyle('table2', $styleTable,$styleFirstRow);
 
 /// datos bancarios
 
-$filename = "onesell-".time().".docx";
+$filename = "Resumen_Compra".time().".docx";
 #$word->setReadDataOnly(true);
 $word->save($filename,"Word2007");
 //chmod($filename,0444);
-header("Content-Disposition: attachment; filename='$filename'");
+header("Content-Disposition: attachment; filename=$filename");
 readfile($filename); // or echo file_get_contents($filename);
 unlink($filename);  // remove temp file
 
 
 
 ?>
+
+
+
