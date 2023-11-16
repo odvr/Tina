@@ -12,7 +12,7 @@ foreach($products as $product){
 	?>
 <div class="row">
 	<div class="col-md-12">
-		<h1>Bienvenido a Inventio Tina</h1>
+		<h1>Bienvenido </h1>
 </div>
 </div>
 
