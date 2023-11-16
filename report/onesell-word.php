@@ -56,5 +56,5 @@ $html .= '<p>Total: $' . number_format($total, 2, ".", ",") . '</p>';
 $pdf->writeHTML($html);
 
 // Salvar el PDF en un archivo (o mostrarlo en el navegador con 'I')
-$pdf->Output('Resumen_Compra' . time() . '.pdf', 'I');
+$pdf->Output('Resumen_Compra' . '.pdf', 'I');
 ?>
