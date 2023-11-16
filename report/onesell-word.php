@@ -9,6 +9,9 @@ include "../core/app/model/ProductData.php";
 
 require_once '../tcpdf/tcpdf.php';
 
+// Configurar la zona horaria
+date_default_timezone_set('America/Mexico_City');
+
 // Crear un nuevo objeto TCPDF
 $pdf = new TCPDF();
 $pdf->AddPage();
@@ -57,4 +60,14 @@ $pdf->writeHTML($html);
 
 // Salvar el PDF en un archivo (o mostrarlo en el navegador con 'I')
 $pdf->Output('Resumen_Compra' . '.pdf', 'I');
+// Guardar el PDF en un archivo
+$filename = "Resumen_Compra" . time() . ".pdf";
+$pdf->Output($filename, 'I');
+
+// Descargar el PDF
+header("Content-Disposition: attachment; filename=$filename");
+readfile($filename);
+unlink($filename);  // Eliminar el archivo temporal
+
+
 ?>
