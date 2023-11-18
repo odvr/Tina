@@ -1,8 +1,8 @@
 
 <h1>Resumen de Venta</h1>
 <div class="btn-group pull-right">
-    <a href="report/onesell-word.php?id=<?php echo $_GET["id"];?>" class="btn btn-secondary">
-        <i class="fa fa-download"></i> Descargar Word 2007 (.docx)
+    <a href="report/onesell-word.php?id=<?php echo $_GET["id"];?>" class="btn btn-secondary" target="_blank">
+        <i class="fa fa-download"></i> Descargar Comprobante PDF
     </a>
 </div>
 <br>
@@ -21,7 +21,7 @@ if(isset($_COOKIE["selled"])){
 		// print "qx=$qx";
 			$p = $operation->getProduct();
 		if($qx==0){
-			echo "<p class='alert alert-danger'>El producto <b style='text-transform:uppercase;'> $p->name</b> no tiene existencias en inventario.</p>";			
+			echo "<p class='alert alert-danger'>El producto <b style='text-transform:uppercase;'> $p->name</b> no tiene existencias en inventario.</p>";
 		}else if($qx<=$p->inventary_min/2){
 			echo "<p class='alert alert-danger'>El producto <b style='text-transform:uppercase;'> $p->name</b> tiene muy pocas existencias en inventario.</p>";
 		}else if($qx<=$p->inventary_min){
@@ -55,7 +55,7 @@ $user = $sell->getUser();
 </table>
 <br><table class="table table-bordered table-hover">
 	<thead>
-		<th>Codigo</th>
+		<th>Codigo de Barras</th>
 		<th>Cantidad</th>
 		<th>Nombre del Producto</th>
 		<th>Precio Unitario</th>
@@ -67,7 +67,7 @@ $user = $sell->getUser();
 		$product  = $operation->getProduct();
 ?>
 <tr>
-	<td><?php echo $product->id ;?></td>
+	<td><?php echo $product->barcode ;?></td>
 	<td><?php echo $operation->q ;?></td>
 	<td><?php echo $product->name ;?></td>
 	<td>$ <?php echo number_format($product->price_out,2,".",",") ;?></td>
