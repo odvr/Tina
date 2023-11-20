@@ -4,6 +4,7 @@ include "../core/app/model/ProductData.php";
 include "../core/app/model/CategoryData.php";
 
 require_once '../tcpdf/tcpdf.php';
+date_default_timezone_set('America/Bogota');
 
 // Crear un nuevo documento PDF
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
