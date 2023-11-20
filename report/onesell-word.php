@@ -131,6 +131,8 @@ $html .= '<p style="text-align: right;"><strong>Total:</strong> $' . number_form
 // Agregar el contenido HTML al PDF
 $pdf->writeHTML($html);
 
+ob_end_clean();
+
 // Generar un código de barras
 $style = array(
     'position' => '',
