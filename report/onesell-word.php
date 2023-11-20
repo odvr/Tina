@@ -9,6 +9,8 @@ include "../core/app/model/ProductData.php";
 
 require_once '../tcpdf/tcpdf.php';
 
+
+
 // create new PDF document
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
@@ -98,14 +100,21 @@ if ($sell->person_id != null) {
 
 $html .= '</table>';
 $html .= '<br>';
+$html .= '<br>';
 $html .= '<table border="1" style="border-collapse: collapse; width: 100%;">';
-$html .= '<tr style="background-color: #337ab7; color: #fff;"><th>Referencia Producto</th><th>Cantidad</th><th>Nombre del producto</th><th>Precio Unitario</th><th>Total</th></tr>';
+$html .= '<tr style="background-color: #337ab7; color: #fff;">';
+$html .= '<th class="small-column">Referencia Producto</th>';
+$html .= '<th>Cantidad</th>';
+$html .= '<th>Nombre del producto</th>';
+$html .= '<th>Precio Unitario</th>';
+$html .= '<th>Total</th>';
+$html .= '</tr>';
 $total = 0;
 
 foreach ($operations as $operation) {
     $product = $operation->getProduct();
     $html .= '<tr>';
-    $html .= '<td>' . $product->barcode . '</td>';
+    $html .= '<td class="small-column">' . $product->barcode . '</td>'; // Clase de estilo para la columna más pequeña
     $html .= '<td>' . $operation->q . '</td>';
     $html .= '<td>' . $product->name . '</td>';
     $html .= '<td>$' . number_format($product->price_out, 2, ".", ",") . '</td>';

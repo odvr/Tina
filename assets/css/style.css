@@ -3348,6 +3348,9 @@ html:not([dir=rtl]) .form-check-inline .form-check-input ~ .invalid-feedback {
   --cui-btn-disabled-bg: #9da5b1;
   --cui-btn-disabled-border-color: #9da5b1;
 }
+.small-column {
+  width: 10%;
+}
 
 .btn-success {
   --cui-btn-color: #000015;
