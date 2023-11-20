@@ -10,7 +10,7 @@ include "../core/app/model/ProductData.php";
 require_once '../tcpdf/tcpdf.php';
 
 
-
+ob_start();
 // create new PDF document
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
@@ -161,4 +161,5 @@ $pdf->Output($filename, 'I');
 header("Content-Disposition: attachment; filename=$filename");
 readfile($filename);
 unlink($filename);  // Eliminar el archivo
+ob_end_flush();
 ?>
