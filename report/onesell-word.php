@@ -65,6 +65,7 @@ if ($sell->person_id != null) {
 $user = $sell->getUser();
 
 $html = '<h1 style="text-align: right; color: #337ab7;">RESUMEN DE VENTA</h1>';
+$html .= '<p style="text-align: right;">Fecha de Emisión: ' . date('Y-m-d') . '</p>';
 $html .= '<table border="1" style="border-collapse: collapse; width: 100%;">';
 $html .= '<tr style="background-color: #f5f5f5;"><td><strong>Atendido por</strong></td><td>' . $user->name . ' ' . $user->lastname . '</td></tr>';
 if ($sell->person_id != null) {
