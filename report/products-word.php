@@ -3,67 +3,65 @@ include "../core/autoload.php";
 include "../core/app/model/ProductData.php";
 include "../core/app/model/CategoryData.php";
 
-require_once '../PhpWord/Autoloader.php';
-use PhpOffice\PhpWord\Autoloader;
-use PhpOffice\PhpWord\Settings;
+require_once '../tcpdf/tcpdf.php';
 
-Autoloader::register();
+// Crear un nuevo documento PDF
+$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
-$word = new  PhpOffice\PhpWord\PhpWord();
+// Configurar información del documento
+$pdf->SetCreator(PDF_CREATOR);
+$pdf->SetAuthor('TuNombre'); // Cambia TuNombre por el autor deseado
+$pdf->SetTitle('Productos');
+$pdf->SetSubject('Listado de Productos');
+$pdf->SetKeywords('TCPDF, PDF, productos, listado');
+
+// Configurar márgenes y otras opciones
+$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+
+// Configurar la fuente
+$pdf->SetFont('helvetica', '', 12);
+
+// Agregar una página
+$pdf->AddPage();
+
+// Obtener la información de los productos
 $products = ProductData::getAll();
 
+// Configurar la tabla
+$html = '<h1 style="text-align: right;">PRODUCTOS</h1>';
+$html .= '<p style="text-align: right;">Fecha de Descarga: ' . date('Y-m-d') . '</p>';
+$html .= '<table border="1" style="border-collapse: collapse; width: 100%;">';
+$html .= '<tr><th>Nombre</th><th>Precio Entrada</th><th>Precio Salida</th><th>Unidad</th><th>Presentacion</th><th>Categoria</th><th>Minima en Inv.</th><th>Activo</th></tr>';
 
-$section1 = $word->AddSection();
-$section1->addText("PRODUCTOS",array("size"=>22,"bold"=>true,"align"=>"right"));
-
-
-$styleTable = array('borderSize' => 6, 'borderColor' => '888888', 'cellMargin' => 40);
-$styleFirstRow = array('borderBottomColor' => '0000FF', 'bgColor' => 'AAAAAA');
-
-$table1 = $section1->addTable("table1");
-$table1->addRow();
-$table1->addCell()->addText("Id");
-$table1->addCell()->addText("Nombre");
-$table1->addCell()->addText("Precio Entrada");
-$table1->addCell()->addText("Precio Salida");
-$table1->addCell()->addText("Unidad");
-$table1->addCell()->addText("Presentacion");
-$table1->addCell()->addText("Categoria");
-$table1->addCell()->addText("Minima en Inv.");
-$table1->addCell()->addText("Activo");
-foreach($products as $product){
-$table1->addRow();
-$table1->addCell(500)->addText($product->id);
-$table1->addCell(5000)->addText($product->name);
-$table1->addCell(2000)->addText($product->price_in);
-$table1->addCell(2000)->addText($product->price_out);
-$table1->addCell(2000)->addText($product->unit);
-$table1->addCell(2000)->addText($product->presentation);
-if($product->category_id!=null){
-	$table1->addCell(2000)->addText($product->getCategory()->name);
-
-}else{
-	$table1->addCell(2000)->addText("---");
-}
-$table1->addCell(2000)->addText($product->inventary_min);
-if($product->is_active){
-$table1->addCell(100)->addText("Si");
-}else{
-$table1->addCell(100)->addText("No");
-}
+foreach ($products as $product) {
+    $html .= '<tr>';
+    //$html .= '<td>' . $product->id . '</td>';
+    $html .= '<td>' . $product->name . '</td>';
+    $html .= '<td>' . $product->price_in . '</td>';
+    $html .= '<td>' . $product->price_out . '</td>';
+    $html .= '<td>' . $product->unit . '</td>';
+    $html .= '<td>' . $product->presentation . '</td>';
+    $html .= '<td>' . ($product->category_id != null ? $product->getCategory()->name : '---') . '</td>';
+    $html .= '<td>' . $product->inventary_min . '</td>';
+    $html .= '<td>' . ($product->is_active ? 'Si' : 'No') . '</td>';
+    $html .= '</tr>';
 }
 
-$word->addTableStyle('table1', $styleTable,$styleFirstRow);
-/// datos bancarios
+$html .= '</table>';
 
-$filename = "products-".time().".docx";
-#$word->setReadDataOnly(true);
-$word->save($filename,"Word2007");
-//chmod($filename,0444);
-header("Content-Disposition: attachment; filename='$filename'");
-readfile($filename); // or echo file_get_contents($filename);
-unlink($filename);  // remove temp file
+// Agregar el contenido HTML al PDF
+$pdf->writeHTML($html, true, false, true, false, '');
 
+// Guardar el PDF en un archivo (o mostrarlo en el navegador con 'I')
+$filename = "products-" . date('Y-m-d') . ".pdf";
+$pdf->Output($filename, 'I');
 
-
+// Descargar el PDF
+header("Content-Disposition: attachment; filename=$filename");
+readfile($filename);
+unlink($filename); // Eliminar el archivo temporal
 ?>
