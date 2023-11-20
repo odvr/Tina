@@ -9,8 +9,6 @@ include "../core/app/model/ProductData.php";
 
 require_once '../tcpdf/tcpdf.php';
 
-
-ob_start();
 // create new PDF document
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
@@ -45,7 +43,7 @@ $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 // set some language-dependent strings (optional)
 if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
     require_once(dirname(__FILE__).'/lang/eng.php');
-    //$pdf->setLanguageArray($l);
+    $pdf->setLanguageArray($l);
 }
 
 // ---------------------------------------------------------
@@ -56,21 +54,17 @@ $pdf->SetFont('helvetica', '', 12);
 $pdf->AddPage();
 
 // Configurar la zona horaria
-date_default_timezone_set('America/Bogota');
+date_default_timezone_set('America/Mexico_City');
 
 $sell = SellData::getById($_GET["id"]);
 $operations = OperationData::getAllProductsBySellId($_GET["id"]);
-
-
 if ($sell->person_id != null) {
     $client = $sell->getPerson();
 }
 
 $user = $sell->getUser();
 
-
 $html = '<h1 style="text-align: right; color: #337ab7;">RESUMEN DE VENTA</h1>';
-
 $html .= '<p style="text-align: right;">Fecha de Emisión: ' . date('Y-m-d') . '</p>';
 $html .= '<table border="1" style="border-collapse: collapse; width: 100%;">';
 $html .= '<tr style="background-color: #f5f5f5;"><td><strong>Atendido por</strong></td><td>' . $user->name . ' ' . $user->lastname . '</td></tr>';
@@ -99,24 +93,16 @@ if ($sell->person_id != null) {
     $html .= '<br></br>';
 
 }
-
 $html .= '</table>';
 $html .= '<br>';
-$html .= '<br>';
 $html .= '<table border="1" style="border-collapse: collapse; width: 100%;">';
-$html .= '<tr style="background-color: #337ab7; color: #fff;">';
-$html .= '<th class="small-column">Referencia Producto</th>';
-$html .= '<th>Cantidad</th>';
-$html .= '<th>Nombre del producto</th>';
-$html .= '<th>Precio Unitario</th>';
-$html .= '<th>Total</th>';
-$html .= '</tr>';
+$html .= '<tr style="background-color: #337ab7; color: #fff;"><th>Codigo De Barras</th><th>Cantidad</th><th>Nombre del producto</th><th>Precio Unitario</th><th>Total</th></tr>';
 $total = 0;
 
 foreach ($operations as $operation) {
     $product = $operation->getProduct();
     $html .= '<tr>';
-    $html .= '<td class="small-column">' . $product->barcode . '</td>'; // Clase de estilo para la columna más pequeña
+    $html .= '<td>' . $product->barcode . '</td>';
     $html .= '<td>' . $operation->q . '</td>';
     $html .= '<td>' . $product->name . '</td>';
     $html .= '<td>$' . number_format($product->price_out, 2, ".", ",") . '</td>';
@@ -161,5 +147,4 @@ $pdf->Output($filename, 'I');
 header("Content-Disposition: attachment; filename=$filename");
 readfile($filename);
 unlink($filename);  // Eliminar el archivo
-ob_end_flush();
 ?>
