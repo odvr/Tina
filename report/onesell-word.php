@@ -54,7 +54,7 @@ $pdf->SetFont('helvetica', '', 12);
 $pdf->AddPage();
 
 // Configurar la zona horaria
-date_default_timezone_set('America/Mexico_City');
+date_default_timezone_set('America/Bogota');
 
 $sell = SellData::getById($_GET["id"]);
 $operations = OperationData::getAllProductsBySellId($_GET["id"]);
@@ -64,16 +64,42 @@ if ($sell->person_id != null) {
 
 $user = $sell->getUser();
 
+
 $html = '<h1 style="text-align: right; color: #337ab7;">RESUMEN DE VENTA</h1>';
+
+$html .= '<p style="text-align: right;">Fecha de Emisión: ' . date('Y-m-d') . '</p>';
 $html .= '<table border="1" style="border-collapse: collapse; width: 100%;">';
 $html .= '<tr style="background-color: #f5f5f5;"><td><strong>Atendido por</strong></td><td>' . $user->name . ' ' . $user->lastname . '</td></tr>';
 if ($sell->person_id != null) {
-    $html .= '<tr style="background-color: #f5f5f5;"><td><strong>Cliente</strong></td><td>' . $client->name . ' ' . $client->lastname . '</td></tr>';
+    // Cliente
+    $html .= '<tr style="background-color: #f5f5f5;">';
+    $html .= '<td><strong>Cliente</strong></td>';
+    $html .= '<td colspan="4">' . $client->name . ' ' . $client->lastname . '</td>';
+    $html .= '</tr>';
+    // Dirección
+    $html .= '<tr style="background-color: #f5f5f5;">';
+    $html .= '<td><strong>Dirección</strong></td>';
+    $html .= '<td colspan="4">' .  $client->address1  . '</td>';
+    $html .= '</tr>';
+    // Correo Electrónico
+    $html .= '<tr style="background-color: #f5f5f5;">';
+    $html .= '<td><strong>Correo Electrónico</strong></td>';
+    $html .= '<td colspan="4">' .  $client->email1 . '</td>';
+    $html .= '</tr>';
+
+    // Teléfono
+    $html .= '<tr style="background-color: #f5f5f5;">';
+    $html .= '<td><strong>Teléfono</strong></td>';
+    $html .= '<td colspan="4">' .  $client->phone1 . '</td>';
+    $html .= '</tr>';
+    $html .= '<br></br>';
+
 }
+
 $html .= '</table>';
 $html .= '<br>';
 $html .= '<table border="1" style="border-collapse: collapse; width: 100%;">';
-$html .= '<tr style="background-color: #337ab7; color: #fff;"><th>Codigo De Barras</th><th>Cantidad</th><th>Nombre del producto</th><th>Precio Unitario</th><th>Total</th></tr>';
+$html .= '<tr style="background-color: #337ab7; color: #fff;"><th>Referencia Producto</th><th>Cantidad</th><th>Nombre del producto</th><th>Precio Unitario</th><th>Total</th></tr>';
 $total = 0;
 
 foreach ($operations as $operation) {
