@@ -60,6 +60,10 @@ date_default_timezone_set('America/Bogota');
 
 $sell = SellData::getById($_GET["id"]);
 $operations = OperationData::getAllProductsBySellId($_GET["id"]);
+
+if ($pdf->getError()) {
+    die('Error durante la generación del PDF: ' . $pdf->getError());
+}
 if ($sell->person_id != null) {
     $client = $sell->getPerson();
 }
