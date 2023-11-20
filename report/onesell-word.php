@@ -45,7 +45,7 @@ $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
 // set some language-dependent strings (optional)
 if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
     require_once(dirname(__FILE__).'/lang/eng.php');
-    $pdf->setLanguageArray($l);
+    //$pdf->setLanguageArray($l);
 }
 
 // ---------------------------------------------------------
@@ -61,9 +61,7 @@ date_default_timezone_set('America/Bogota');
 $sell = SellData::getById($_GET["id"]);
 $operations = OperationData::getAllProductsBySellId($_GET["id"]);
 
-if ($pdf->getError()) {
-    die('Error durante la generación del PDF: ' . $pdf->getError());
-}
+
 if ($sell->person_id != null) {
     $client = $sell->getPerson();
 }
