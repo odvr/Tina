@@ -5,7 +5,7 @@
 <div class="">
 	<a href="index.php?view=newproduct" class="btn btn-secondary">Agregar Producto</a>
     <div class="btn-group pull-right">
-        <a href="report/products-word.php" class="btn btn-secondary">
+        <a href="report/products-word.php" class="btn btn-secondary" style="background-color: green;" target="_blank">
             <i class="fa fa-download"></i> Descargar PDF
         </a>
     </div>
