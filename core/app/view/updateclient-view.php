@@ -7,6 +7,7 @@ if(count($_POST)>0){
 	$user->address1 = $_POST["address1"];
 	$user->email1 = $_POST["email1"];
 	$user->phone1 = $_POST["phone1"];
+    $user->phone2 = $_POST["phone2"];
 	$user->update_client();
 
 

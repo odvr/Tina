@@ -43,7 +43,15 @@
     </div>
   </div>
 
+            <div class="form-group">
+                <label for="inputEmail1" class="col-lg-2 control-label">Nit/Cedula</label>
+                <div class="col-md-6">
+                    <input type="text" name="phone2" class="form-control" id="phone2" placeholder="Nit/Cedula">
+                </div>
+            </div>
 
+
+<br>
 
   <p class="alert alert-info">* Campos obligatorios</p>
 

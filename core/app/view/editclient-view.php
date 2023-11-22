@@ -44,9 +44,20 @@
       <input type="text" name="phone1"  value="<?php echo $user->phone1;?>"  class="form-control" id="inputEmail1" placeholder="Telefono">
     </div>
   </div>
+<div class="form-group">
+    <label for="inputEmail1" class="col-lg-2 control-label">Nit/Cedula</label>
+    <div class="col-md-6">
+       <input type="text" name="phone2"  value="<?php echo $user->phone2;?>"  class="form-control" id="inputEmail1" placeholder="Telefono">
+    </div>
+</div>
+            <br>
 
 
-  <p class="alert alert-info">* Campos obligatorios</p>
+
+
+
+
+            <p class="alert alert-info">* Campos obligatorios</p>
 
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">

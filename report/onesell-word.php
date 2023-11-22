@@ -73,27 +73,34 @@ $html = '<h1 style="text-align: right; color: #337ab7;">RESUMEN DE VENTA</h1>';
 
 $html .= '<p style="text-align: right;">Fecha de Emisión: ' . date('Y-m-d') . '</p>';
 $html .= '<table border="1" style="border-collapse: collapse; width: 100%;">';
-$html .= '<tr style="background-color: #f5f5f5;"><td><strong>Atendido por</strong></td><td>' . $user->name . ' ' . $user->lastname . '</td></tr>';
+$html .= '<tr style="background-color: #f5f5f5;"><td><strong>ATENDIDO POR</strong></td><td>' . $user->name . ' ' . $user->lastname . '</td></tr>';
 if ($sell->person_id != null) {
     // Cliente
     $html .= '<tr style="background-color: #f5f5f5;">';
-    $html .= '<td><strong>Cliente</strong></td>';
+    $html .= '<td><strong>CLIENTE</strong></td>';
     $html .= '<td colspan="4">' . $client->name . ' ' . $client->lastname . '</td>';
     $html .= '</tr>';
     // Dirección
     $html .= '<tr style="background-color: #f5f5f5;">';
-    $html .= '<td><strong>Dirección</strong></td>';
+    $html .= '<td><strong>DIRECCIÓN</strong></td>';
     $html .= '<td colspan="4">' .  $client->address1  . '</td>';
     $html .= '</tr>';
     // Correo Electrónico
     $html .= '<tr style="background-color: #f5f5f5;">';
-    $html .= '<td><strong>Correo Electrónico</strong></td>';
+    $html .= '<td><strong>CORREO ELECTRÓNICO</strong></td>';
     $html .= '<td colspan="4">' .  $client->email1 . '</td>';
     $html .= '</tr>';
 
     // Teléfono
     $html .= '<tr style="background-color: #f5f5f5;">';
-    $html .= '<td><strong>Teléfono</strong></td>';
+    $html .= '<td><strong>NIT/CEDULA</strong></td>';
+    $html .= '<td colspan="4">' .  $client->phone2 . '</td>';
+    $html .= '</tr>';
+
+
+    // Teléfono
+    $html .= '<tr style="background-color: #f5f5f5;">';
+    $html .= '<td><strong>TELÉFONO</strong></td>';
     $html .= '<td colspan="4">' .  $client->phone1 . '</td>';
     $html .= '</tr>';
     $html .= '<br></br>';
@@ -130,7 +137,7 @@ $html .= '<p style="text-align: right;"><strong>Total:</strong> $' . number_form
 
 // Agregar el contenido HTML al PDF
 $pdf->writeHTML($html);
-
+// Limpiar el búfer de salida
 ob_end_clean();
 
 // Generar un código de barras

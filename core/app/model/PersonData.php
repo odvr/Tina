@@ -13,14 +13,14 @@ class PersonData {
 	}
 
 	public function add_client(){
-		$sql = "insert into person (name,lastname,address1,email1,phone1,kind,created_at) ";
-		$sql .= "value (\"$this->name\",\"$this->lastname\",\"$this->address1\",\"$this->email1\",\"$this->phone1\",1,$this->created_at)";
+		$sql = "insert into person (name,lastname,address1,email1,phone1,phone2,kind,created_at) ";
+		$sql .= "value (\"$this->name\",\"$this->lastname\",\"$this->address1\",\"$this->email1\",\"$this->phone1\",\"$this->phone2\",1,$this->created_at)";
 		Executor::doit($sql);
 	}
 
 	public function add_provider(){
-		$sql = "insert into person (name,lastname,address1,email1,phone1,kind,created_at) ";
-		$sql .= "value (\"$this->name\",\"$this->lastname\",\"$this->address1\",\"$this->email1\",\"$this->phone1\",2,$this->created_at)";
+		$sql = "insert into person (name,lastname,address1,email1,phone1,,phone2,kind,created_at) ";
+		$sql .= "value (\"$this->name\",\"$this->lastname\",\"$this->address1\",\"$this->email1\",\"$this->phone1\",\"$this->phone2\",2,$this->created_at)";
 		Executor::doit($sql);
 	}
 
@@ -35,17 +35,17 @@ class PersonData {
 
 // partiendo de que ya tenemos creado un objecto PersonData previamente utilizamos el contexto
 	public function update(){
-		$sql = "update ".self::$tablename." set name=\"$this->name\",email1=\"$this->email1\",address1=\"$this->address1\",lastname=\"$this->lastname\",phone1=\"$this->phone1\" where id=$this->id";
+		$sql = "update ".self::$tablename." set name=\"$this->name\",email1=\"$this->email1\",address1=\"$this->address1\",lastname=\"$this->lastname\",phone1=\"$this->phone1\",phone2=\"$this->phone2\" where id=$this->id";
 		Executor::doit($sql);
 	}
 
 	public function update_client(){
-		$sql = "update ".self::$tablename." set name=\"$this->name\",email1=\"$this->email1\",address1=\"$this->address1\",lastname=\"$this->lastname\",phone1=\"$this->phone1\" where id=$this->id";
+		$sql = "update ".self::$tablename." set name=\"$this->name\",email1=\"$this->email1\",address1=\"$this->address1\",lastname=\"$this->lastname\",phone1=\"$this->phone1\",phone2=\"$this->phone2\" where id=$this->id";
 		Executor::doit($sql);
 	}
 
 	public function update_provider(){
-		$sql = "update ".self::$tablename." set name=\"$this->name\",email1=\"$this->email1\",address1=\"$this->address1\",lastname=\"$this->lastname\",phone1=\"$this->phone1\" where id=$this->id";
+		$sql = "update ".self::$tablename." set name=\"$this->name\",email1=\"$this->email1\",address1=\"$this->address1\",lastname=\"$this->lastname\",phone1=\"$this->phone1\",phone2=\"$this->phone2\" where id=$this->id";
 		Executor::doit($sql);
 	}
 
@@ -66,6 +66,7 @@ class PersonData {
 			$data->lastname = $r['lastname'];
 			$data->address1 = $r['address1'];
 			$data->phone1 = $r['phone1'];
+            $data->phone2 = $r['phone2'];
 			$data->email1 = $r['email1'];
 			$data->created_at = $r['created_at'];
 			$found = $data;
@@ -89,6 +90,7 @@ class PersonData {
 			$array[$cnt]->email = $r['email1'];
 			$array[$cnt]->username = $r['username'];
 			$array[$cnt]->phone1 = $r['phone1'];
+            $array[$cnt]->phone2 = $r['phone2'];
 			$array[$cnt]->address1 = $r['address1'];
 			$array[$cnt]->created_at = $r['created_at'];
 			$cnt++;
@@ -108,6 +110,7 @@ class PersonData {
 			$array[$cnt]->lastname = $r['lastname'];
 			$array[$cnt]->email1 = $r['email1'];
 			$array[$cnt]->phone1 = $r['phone1'];
+            $array[$cnt]->phone2 = $r['phone2'];
 			$array[$cnt]->address1 = $r['address1'];
 			$array[$cnt]->created_at = $r['created_at'];
 			$cnt++;
@@ -128,6 +131,7 @@ class PersonData {
 			$array[$cnt]->lastname = $r['lastname'];
 			$array[$cnt]->email1 = $r['email1'];
 			$array[$cnt]->phone1 = $r['phone1'];
+            $array[$cnt]->phone2 = $r['phone2'];
 			$array[$cnt]->address1 = $r['address1'];
 			$array[$cnt]->created_at = $r['created_at'];
 			$cnt++;
