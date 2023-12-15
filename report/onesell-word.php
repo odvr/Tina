@@ -111,11 +111,11 @@ $html .= '<br>';
 $html .= '<br>';
 $html .= '<table border="1" style="border-collapse: collapse; width: 100%; font-size: 12px;">'; // Ajusta el tamaño de la fuente aquí
 $html .= '<tr style="background-color: #337ab7; color: #fff;">';
-$html .= '<th class="small-column">Referencia Producto</th>';
-$html .= '<th style="font-size: 12px;">Cantidad</th>'; // Ajusta el tamaño de la fuente aquí
-$html .= '<th style="font-size: 12px;">Nombre del producto</th>'; // Ajusta el tamaño de la fuente aquí
-$html .= '<th style="font-size: 12px;">Precio Unitario</th>'; // Ajusta el tamaño de la fuente aquí
-$html .= '<th style="font-size: 12px;">Total</th>'; // Ajusta el tamaño de la fuente aquí
+$html .= '<th class="small-column" style="width: 10%;">Referencia Producto</th>'; // Ajusta el ancho de la columna
+$html .= '<th style="font-size: 12px; width: 10%;">Cantidad</th>'; // Ajusta el ancho de la columna
+$html .= '<th style="font-size: 12px; width: 45%;">Nombre del producto</th>'; // Ajusta el ancho de la columna
+$html .= '<th style="font-size: 12px; width: 15%;">Precio Unitario</th>'; // Ajusta el ancho de la columna
+$html .= '<th style="font-size: 12px; width: 20%;">Total</th>'; // Ajusta el ancho de la columna
 $html .= '</tr>';
 $total = 0;
 
