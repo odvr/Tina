@@ -109,13 +109,13 @@ if ($sell->person_id != null) {
 $html .= '</table>';
 $html .= '<br>';
 $html .= '<br>';
-$html .= '<table border="1" style="border-collapse: collapse; width: 100%;">';
+$html .= '<table border="1" style="border-collapse: collapse; width: 100%; font-size: 12px;">'; // Ajusta el tamaño de la fuente aquí
 $html .= '<tr style="background-color: #337ab7; color: #fff;">';
 $html .= '<th class="small-column">Referencia Producto</th>';
-$html .= '<th>Cantidad</th>';
-$html .= '<th>Nombre del producto</th>';
-$html .= '<th>Precio Unitario</th>';
-$html .= '<th>Total</th>';
+$html .= '<th style="font-size: 12px;">Cantidad</th>'; // Ajusta el tamaño de la fuente aquí
+$html .= '<th style="font-size: 12px;">Nombre del producto</th>'; // Ajusta el tamaño de la fuente aquí
+$html .= '<th style="font-size: 12px;">Precio Unitario</th>'; // Ajusta el tamaño de la fuente aquí
+$html .= '<th style="font-size: 12px;">Total</th>'; // Ajusta el tamaño de la fuente aquí
 $html .= '</tr>';
 $total = 0;
 
